@@ -5,7 +5,7 @@ const contacts = require('../../models/contacts');
 
 const { createError } = require("../../helpers");
 
-const router = express.Router()
+const router = express.Router();
 
 const contactAddSchema = Joi.object({
   name: Joi.string().required(),
@@ -63,7 +63,18 @@ router.post('/', async (req, res, next) => {
 })
 
 router.delete('/:contactId', async (req, res, next) => {
-  res.json({ message: 'template message' })
+ try {
+   const { contactId } = req.params;
+   const result = await contacts.removeContact(contactId);
+   if (!result) {
+     throw createError(404)
+   }
+   res.json({
+     message: "Book deleted"
+   })
+ } catch (error) {
+   next(error);
+ }
 })
 
 router.put('/:contactId', async (req, res, next) => {
@@ -80,7 +91,7 @@ router.put('/:contactId', async (req, res, next) => {
   }
 })
 
-module.exports = router
+module.exports = router;
 
 
 
