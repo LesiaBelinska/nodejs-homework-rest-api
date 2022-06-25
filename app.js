@@ -27,8 +27,3 @@ app.use((err, req, res, next) => {
 })
 
 module.exports = app;
-
-
-
-// x0UmkR2sg7jhrVUh
-// x0UmkR2sg7jhrVUh
