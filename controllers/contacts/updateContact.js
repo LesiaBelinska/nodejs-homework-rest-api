@@ -1,15 +1,9 @@
-const contacts = require('../../service/contacts');
-const { createError } = require("../../helpers");
-const { addSchema } = require("../../schemas/contacts");
+const { Contact } = require("../../models/contact");
 
 const updateContact = async (req, res, next) => {
   try {
-    const { error } = addSchema.validate(req.body);
-    if (error) {
-      throw createError(400, error.message);
-    }
     const { contactId } = req.params;
-    const result = await contacts.updateContact(contactId, req.body);
+    const result = await Contact.findByIdAndUpdate(contactId, req.body, {new: true});
     res.status(201).json(result);
   } catch (error) {
     next(error);
