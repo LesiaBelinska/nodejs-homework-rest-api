@@ -23,5 +23,3 @@ router.patch("/:contactId/favorite", isValidId, validation(schemas.updateFavorit
 
 module.exports = router;
 
-
-
