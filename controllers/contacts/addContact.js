@@ -1,14 +1,10 @@
-const contacts = require('../../service/contacts');
+const {Contact} = require("../../models/contact")
+
 const { createError } = require("../../helpers");
-const { addSchema } = require("../../schemas/contacts");
 
 const addContact = async (req, res, next) => {
   try {
-    const { error } = addSchema.validate(req.body);
-    if (error) {
-      throw createError(400, error.message);
-    }
-    const result = await contacts.addContact(req.body);
+    const result = await Contact.create(req.body);
     if (!result) {
       throw createError(404);
     }
