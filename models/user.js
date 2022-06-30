@@ -33,8 +33,6 @@ const User = model("user", userSchema);
 const signup = Joi.object({
     password: Joi.string().min(6).required(),
     email: Joi.string().pattern(emailRegexp).required(),
-    subscription: Joi.string().valid("starter", "pro", "business"),
-    token: Joi.string(),
 });
 
 const schemas = {
