@@ -4,7 +4,8 @@ const { createError } = require("../../helpers");
 
 const addContact = async (req, res, next) => {
   try {
-    const result = await Contact.create(req.body);
+    const { _id: owner } = req.user;
+    const result = await Contact.create({...req.body, owner});
     if (!result) {
       throw createError(404);
     }

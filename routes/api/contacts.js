@@ -2,18 +2,18 @@ const express = require('express');
 
 const ctrl = require("../../controllers/contacts");
 
-const { validation, isValidId } = require("../../middlewares");
+const { authenticate, validation, isValidId } = require("../../middlewares");
 
 const { schemas } = require("../../models/contact");
 
 const router = express.Router();
 
 
-router.get('/', ctrl.listContacts);
+router.get('/', authenticate, ctrl.listContacts);
 
 router.get('/:contactId',isValidId, ctrl.getContactById);
 
-router.post('/', validation(schemas.add), ctrl.addContact);
+router.post('/', authenticate, validation(schemas.add), ctrl.addContact);
 
 router.delete('/:contactId', isValidId, ctrl.removeContact);
 
