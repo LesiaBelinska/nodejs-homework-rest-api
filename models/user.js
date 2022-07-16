@@ -48,8 +48,13 @@ const signup = Joi.object({
   email: Joi.string().pattern(emailRegexp).required(),
 });
 
+const email = Joi.object({
+  email: Joi.string().pattern(emailRegexp).required(),
+});
+
 const schemas = {
   signup,
+  email,
 };
 
 module.exports = {
