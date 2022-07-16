@@ -10,12 +10,19 @@ const router = express.Router();
 
 router.post("/signup", validation(schemas.signup), ctrl.signup);
 
+router.get("/verify/:verificationToken", ctrl.verify);
+
 router.post("/login", validation(schemas.signup), ctrl.login);
 
 router.get("/logout", authenticate, ctrl.logout);
 
 router.get("/current", authenticate, ctrl.getCurrent);
 
-router.patch("/avatars", authenticate, upload.single("avatar"), ctrl.updateAvatar);
+router.patch(
+  "/avatars",
+  authenticate,
+  upload.single("avatar"),
+  ctrl.updateAvatar
+);
 
 module.exports = router;
