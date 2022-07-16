@@ -1,6 +1,6 @@
 const bcrypt = require("bcryptjs");
 const gravatar = require("gravatar");
-const idGenerate = require("uuidv4");
+const { v4: uuidv4 } = require("uuid");
 
 const { User } = require("../../models/user");
 
@@ -15,7 +15,7 @@ const signup = async (req, res, next) => {
     }
     const hashPassword = await bcrypt.hash(password, 10);
     const avatarURL = gravatar.url(email);
-    const verificationToken = idGenerate();
+    const verificationToken = uuidv4();
     const result = await User.create({
       ...req.body,
       password: hashPassword,
